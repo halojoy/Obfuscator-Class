@@ -23,7 +23,7 @@ $sData = <<<'DATA'
 DATA;
 
 $sObfusationData = new Obfuscator($sData, 'Class/Code NAME');
-file_put_contents('my_obfuscated_data.php', '<?php ' . "\r\n" . $sObfusationData);
+file_put_contents('my_obfuscated_data.php', $sObfusationData);
 ```
 
 ### Example 2
@@ -35,7 +35,7 @@ require 'Obfuscator.class.php';
 $sData = <<<'DATA'
     $hour = date('H');
 
-    echo 'The hour (of the server) is ' . date('H:m');
+    echo 'The hour (of the server) is ' . date('H:i');
     echo ', and will give the following message:<br><br>';
 
     if ($hour < 10) {
@@ -48,7 +48,7 @@ $sData = <<<'DATA'
 DATA;
 
 $sObfusationData = new Obfuscator($sData, 'Give a name to the piece of code you want to obfuscate');
-file_put_contents('obfuscated_code.php', '<?php ' . "\r\n" . $sObfusationData);
+file_put_contents('obfuscated_code.php', $sObfusationData);
 ```
 
 Run `obfuscated_code.php` file and you will see something like below:
@@ -62,12 +62,11 @@ Run `obfuscated_code.php` file and you will see something like below:
 <?php
 require 'Obfuscator.class.php';
 
-$filename = 'myphpfile'; // A PHP filename (without .php) that you want to obfuscate
+$filename = 'myphpfile.php'; // A PHP filename (without .php) that you want to obfuscate
 
-$sData = file_get_contents($filename . '.php');
-$sData = str_replace(array('<?php', '<?', '?>'), '', $sData); // Strip PHP open/close tags
+$sData = file_get_contents($filename);
 $sObfusationData = new Obfuscator($sData, 'Class/Code NAME');
-file_put_contents($filename . '_obfuscated.php', '<?php ' . "\r\n" . $sObfusationData);
+file_put_contents('obfuscated.php', $sObfusationData);
 ```
 
 

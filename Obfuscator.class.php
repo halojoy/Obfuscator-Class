@@ -28,12 +28,15 @@ class Obfuscator
     {
         $this->sName = $sName;
         $this->sData = $sData;
+        if (substr($this->sData, 0, 5) == '<?php') {
+            $this->sData = substr($this->sData, 5);
+        }
         $this->encrypt();
     }
 
     public function __toString()
     {
-        return $this->sOutput;
+        return "<?php\n" . $this->sOutput;
     }
 
     public function encrypt()
@@ -74,8 +77,10 @@ DATA2;
     {
         $sSpaces = $this->makeBreak(99+(strlen($this->sName)*4)); // Most people will have their PC bugged if they want to modify the code with an editor
 
-        $this->sPreOutput = str_replace(array('[DATA]', '[NAME]', '[BREAK]'), array($this->sData, $this->sName, $sSpaces . "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"), $this->sPreOutput);
-        $this->sOutput = str_replace(array('[PRE_OUTPUT]', '[NAME]', '[BREAK]'), array(base64_encode(gzcompress($this->sPreOutput,9)), $this->sName, $sSpaces), $this->sOutput);
+        $this->sPreOutput = str_replace(array('[DATA]', '[NAME]', '[BREAK]'), array($this->sData, $this->sName, $sSpaces .
+        "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"), $this->sPreOutput);
+        $this->sOutput = str_replace(array('[PRE_OUTPUT]', '[NAME]', '[BREAK]'),
+        array(base64_encode(gzcompress($this->sPreOutput,9)), $this->sName, $sSpaces), $this->sOutput);
     }
 
     /**

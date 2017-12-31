@@ -47,7 +47,7 @@ $sData = <<<'DATA'
     }
 DATA;
 
-$sObfusationData = new Obfuscator($sData, 'Give a name to the piece of code you want to obfuscate');
+$sObfusationData = new Obfuscator($sData, 'Give a name');
 file_put_contents('obfuscated_code.php', $sObfusationData);
 ```
 

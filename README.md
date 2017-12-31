@@ -62,7 +62,7 @@ Run `obfuscated_code.php` file and you will see something like below:
 <?php
 require 'Obfuscator.class.php';
 
-$filename = 'myphpfile.php'; // A PHP filename (without .php) that you want to obfuscate
+$filename = 'myphpfile.php'; // A PHP filename
 
 $sData = file_get_contents($filename);
 $sObfusationData = new Obfuscator($sData, 'Class/Code NAME');
